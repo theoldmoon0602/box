@@ -63,6 +63,9 @@ class UsersController extends AppController
      */
     public function add()
     {
+		if ($this->Auth->user()) {
+			return $this->redirect(['action' => 'view']);
+		}
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
@@ -93,8 +96,12 @@ class UsersController extends AppController
         $user = $this->Users->get($id, [
             'contain' => []
         ]);
+		$email = $user->email; 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
+			if (!isset($user->email)) {
+				$user->email = $email;
+			}
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 

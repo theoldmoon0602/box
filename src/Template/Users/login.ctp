@@ -9,4 +9,5 @@
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
+<?= $this->Html->link('If you forget your password', ['controller'=>'PasswordResets', 'action' => 'add']) ?>
 </div>
