@@ -70,6 +70,19 @@ class PendingQuestionsController extends AppController
             $pendingQuestion = $this->PendingQuestions->patchEntity($pendingQuestion, $this->request->getData());
 			$pendingQuestion->user_id = $this->Auth->user('id');
             if ($this->PendingQuestions->save($pendingQuestion)) {
+				$this->loadModel('Users');
+				$email = new Email();
+				$email->setTransport('gmail');
+				$admin = $this->Users->find()->where(['is_admin' => 1])->first();
+				$email
+					->from('theoldmoon0602@theoldmoon0602.tk', 'theoldmoon0602')
+					->to($admin->email)
+					->subject('質問がきてますで')
+					->send('みてくれ→ ' . Router::url([
+						'controller' => 'PendingQuestions',
+						'action' => 'answer',
+						$pendingQuestion->id
+					], true));
                 $this->Flash->success(__('質問を受け付けましたっ'));
 
                 return $this->redirect(['action' => 'index']);
