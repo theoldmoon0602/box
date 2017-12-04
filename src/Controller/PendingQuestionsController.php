@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
 
 /**
  * PendingQuestions Controller
@@ -129,6 +130,32 @@ class PendingQuestionsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+	public function answer($id = null)
+	{
+		if (! $this->Auth->user('is_admin')) {
+			return $this->redirect(['action'=>'add']);
+		}
+
+		$pendingQuestion = $this->PendingQuestions->get($id);
+		if ($this->request->is('put')) {
+			$quesionsTable = TableRegistry::get('Questions');
+			$question = $quesionsTable->newEntity();
+			$question->user_id = $pendingQuestion->user_id;
+			$question->text = $pendingQuestion->text;
+			$question->answer = $this->request->getData('answer');
+
+			$this->loadModel('Questions');
+            if ($this->Questions->save($question)) {
+				$this->PendingQuestions->delete($pendingQuestion);
+                $this->Flash->success(__('Question is answered'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The pending question could not be saved. Please, try again.'));
+		}
+		$this->set(compact("pendingQuestion"));
+	}
 
 
 	// うまくいかなかったなぜ
