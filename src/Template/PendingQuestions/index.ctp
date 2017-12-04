@@ -1,32 +1,30 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\PasswordReset[]|\Cake\Collection\CollectionInterface $passwordResets
+ * @var \App\Model\Entity\PendingQuestion[]|\Cake\Collection\CollectionInterface $pendingQuestions
  */
 ?>
-<div class="passwordResets index large-9 medium-8 columns content">
-    <h3><?= __('Password Resets') ?></h3>
+<div class="pendingQuestions index large-9 medium-8 columns content">
+    <h3><?= __('Pending Questions') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('token') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($passwordResets as $passwordReset): ?>
+            <?php foreach ($pendingQuestions as $pendingQuestion): ?>
             <tr>
-                <td><?= $this->Number->format($passwordReset->id) ?></td>
-                <td><?= $passwordReset->has('user') ? $this->Html->link($passwordReset->user->id, ['controller' => 'Users', 'action' => 'view', $passwordReset->user->id]) : '' ?></td>
-                <td><?= h($passwordReset->token) ?></td>
-                <td><?= h($passwordReset->created) ?></td>
+                <td><?= $this->Number->format($pendingQuestion->id) ?></td>
+                <td><?= $pendingQuestion->has('user') ? $this->Html->link($pendingQuestion->user->id, ['controller' => 'Users', 'action' => 'view', $pendingQuestion->user->id]) : '' ?></td>
+                <td><?= h($pendingQuestion->created) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $passwordReset->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $passwordReset->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $passwordReset->id], ['confirm' => __('Are you sure you want to delete # {0}?', $passwordReset->id)]) ?>
+                    <?= $this->Html->link(__('View'), ['action' => 'view', $pendingQuestion->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $pendingQuestion->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $pendingQuestion->id], ['confirm' => __('Are you sure you want to delete # {0}?', $pendingQuestion->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

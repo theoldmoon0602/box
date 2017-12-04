@@ -40,15 +40,24 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                 <h1><a href=""><?= $this->fetch('title') ?></a></h1>
             </li>
         </ul>
-        <div class="top-bar-section">
-            <ul class="right">
-                <li><a target="_blank" href="https://book.cakephp.org/3.0/">Documentation</a></li>
-                <li><a target="_blank" href="https://api.cakephp.org/3.0/">API</a></li>
-            </ul>
-        </div>
     </nav>
     <?= $this->Flash->render() ?>
     <div class="container clearfix">
+		<nav class="large-3 medium-4 columns" id="actions-sidebar">
+			<ul class="side-nav">
+				<li class="heading"><?= __('Actions') ?></li>
+				<?php if ($auth->user()): ?>
+				<li><?= $this->Html->link(__('Post Question'), ['controller' => 'PendingQuestions', 'action' => 'add']) ?> </li>
+				<li><?= $this->Html->link(__('Logout'), ['controller' => 'Users', 'action' => 'logout']) ?> </li>
+				<li><?= $this->Html->link(__('View My Information'), ['controller' => 'Users', 'action' => 'view', $auth->user('id')]) ?> </li>
+				<li><?= $this->Html->link(__('Password Reset'), ['controller' => 'Users', 'action' => 'edit', $auth->user('id')]) ?> </li>
+				<li><?= $this->Form->postLink(__('Leave'), ['controller' => 'Users', 'action' => 'delete', $auth->user('id')], ['confirm' => __('Are you sure you want to delete {0}?', $auth->user('email'))]) ?> </li>
+				<?php else: ?>
+				<li><?= $this->Html->link(__('Login'), ['controller' => 'Users', 'action' => 'login']) ?> </li>
+				<li><?= $this->Html->link(__('Register'), ['controller' => 'Users', 'action' => 'addd']) ?> </li>
+				<?php endif; ?>
+			</ul>
+		</nav>
         <?= $this->fetch('content') ?>
     </div>
     <footer>
