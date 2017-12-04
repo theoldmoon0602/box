@@ -29,6 +29,7 @@ class QuestionsController extends AppController
         $this->paginate = [
             'contain' => ['Users']
         ];
+		$this->paginate = [ 'maxLimit' => 5, 'order' => ['created desc']];
         $questions = $this->paginate($this->Questions);
 
         $this->set(compact('questions'));

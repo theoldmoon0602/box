@@ -5,12 +5,13 @@
  */
 ?>
 <div class="questions index large-9 medium-8 columns content">
-    <h3><?= __('Questions') ?></h3>
+	<p>THEOLDMOON0602BOXはふるつきに質問できるさいとです。がんばって答えるので。</p>
 	<div class="row">
             <?php foreach ($questions as $question): ?>
             <div>
 				<h4 class="h4"><?= h($question->text); ?></h4>
-				<p><?= h($question->answer); ?></p>
+				<p><?= h($question->answer); ?>
+				<small><?= h($question->created); ?></small></p>
             </div>
             <?php endforeach; ?>
 	</div>

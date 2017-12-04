@@ -3,6 +3,8 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
+use Cake\Mailer\Email;
+use Cake\Routing\Router;
 
 /**
  * PendingQuestions Controller
@@ -68,11 +70,11 @@ class PendingQuestionsController extends AppController
             $pendingQuestion = $this->PendingQuestions->patchEntity($pendingQuestion, $this->request->getData());
 			$pendingQuestion->user_id = $this->Auth->user('id');
             if ($this->PendingQuestions->save($pendingQuestion)) {
-                $this->Flash->success(__('The pending question has been saved.'));
+                $this->Flash->success(__('質問を受け付けましたっ'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The pending question could not be saved. Please, try again.'));
+            $this->Flash->error(__('ぶっぶー、だめでーす'));
         }
         $users = $this->PendingQuestions->Users->find('list', ['limit' => 200]);
         $this->set(compact('pendingQuestion', 'users'));
@@ -137,7 +139,7 @@ class PendingQuestionsController extends AppController
 			return $this->redirect(['action'=>'add']);
 		}
 
-		$pendingQuestion = $this->PendingQuestions->get($id);
+		$pendingQuestion = $this->PendingQuestions->get($id, ['contain' => 'Users']);
 		if ($this->request->is('put')) {
 			$quesionsTable = TableRegistry::get('Questions');
 			$question = $quesionsTable->newEntity();
@@ -148,11 +150,23 @@ class PendingQuestionsController extends AppController
 			$this->loadModel('Questions');
             if ($this->Questions->save($question)) {
 				$this->PendingQuestions->delete($pendingQuestion);
-                $this->Flash->success(__('Question is answered'));
+				$email = new Email();
+				$email->setTransport('gmail');
+				$email
+					->from('theoldmoon0602@theoldmoon0602.tk', 'theoldmoon0602')
+					->to($pendingQuestion->user->email)
+					->subject('Your question is answered')
+					->send(Router::url([
+						'controller' => 'Questions',
+						'action' => 'view',
+						$question->id
+					], true));
+
+                $this->Flash->success(__('おっけー解答おわり'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The pending question could not be saved. Please, try again.'));
+            $this->Flash->error(__('んーとなんか失敗しました'));
 		}
 		$this->set(compact("pendingQuestion"));
 	}

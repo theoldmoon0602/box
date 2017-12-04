@@ -23,7 +23,7 @@
                 <td><?= h($pendingQuestion->created) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $pendingQuestion->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $pendingQuestion->id]) ?>
+                    <?= $this->Html->link(__('Answer'), ['action' => 'answer', $pendingQuestion->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $pendingQuestion->id], ['confirm' => __('Are you sure you want to delete # {0}?', $pendingQuestion->id)]) ?>
                 </td>
             </tr>

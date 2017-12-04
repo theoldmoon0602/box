@@ -7,11 +7,11 @@
 <div class="users form large-9 medium-8 columns content">
     <?= $this->Form->create($user) ?>
     <fieldset>
-        <legend><?= __('Edit User') ?></legend>
+        <legend><?= __('ぱすわーど変更') ?></legend>
         <?php
             echo $this->Form->control('password', ['value' => '']);
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('これにする')) ?>
     <?= $this->Form->end() ?>
 </div>

@@ -71,11 +71,11 @@ class UsersController extends AppController
             $user = $this->Users->patchEntity($user, $this->request->getData());
 			$user->is_admin = false;
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+                $this->Flash->success(__('れじすたしました'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller'=>'Questions', 'action' => 'index']);
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            $this->Flash->error(__('その情報ではだめぽです'));
         }
         $this->set(compact('user'));
         $this->set('_serialize', ['user']);
@@ -145,12 +145,12 @@ class UsersController extends AppController
 				$this->Auth->setUser($user);
 				return $this->redirect($this->Auth->redirectUrl());
 			}
-			$this->Flash->error('ユーザ名またはパスワードが不正です');
+			$this->Flash->error('ろぐいんできませんが');
 		}
 	}
 
 	public function logout() {
-		$this->Flash->success('ログアウトしました。');
+		$this->Flash->success('あっはい');
 		return $this->redirect($this->Auth->logout());
 	}
 

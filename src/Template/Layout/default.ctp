@@ -45,14 +45,15 @@
 		<nav class="large-3 medium-4 columns" id="actions-sidebar">
 			<ul class="side-nav">
 				<?php if ($auth->user()): ?>
-				<li><?= $this->Html->link(__('Post Question'), ['controller' => 'PendingQuestions', 'action' => 'add']) ?> </li>
-				<li><?= $this->Html->link(__('View My Information'), ['controller' => 'Users', 'action' => 'view', $auth->user('id')]) ?> </li>
-				<li><?= $this->Html->link(__('Password Reset'), ['controller' => 'Users', 'action' => 'edit', $auth->user('id')]) ?> </li>
-				<li><?= $this->Html->link(__('Logout'), ['controller' => 'Users', 'action' => 'logout']) ?> </li>
-				<li><?= $this->Form->postLink(__('Goodbye'), ['controller' => 'Users', 'action' => 'delete', $auth->user('id')], ['confirm' => __('Are you sure you want to delete {0}?', $auth->user('email'))]) ?> </li>
+				<?php if($auth->user('is_admin')): ?>
+				<li><?= $this->Html->link(__('しつもん一覧'), ['controller' => 'PendingQuestions', 'action' => 'index']) ?> </li>
+				<?php endif; ?>
+				<li><?= $this->Html->link(__('しつもんする'), ['controller' => 'PendingQuestions', 'action' => 'add']) ?> </li>
+				<li><?= $this->Html->link(__('ろぐあうと'), ['controller' => 'Users', 'action' => 'logout']) ?> </li>
+				<li><?= $this->Form->postLink(__('やめる'), ['controller' => 'Users', 'action' => 'delete', $auth->user('id')], ['confirm' => __('ゆーざ情報を消してやめますか')]) ?> </li>
 				<?php else: ?>
-				<li><?= $this->Html->link(__('Login'), ['controller' => 'Users', 'action' => 'login']) ?> </li>
-				<li><?= $this->Html->link(__('Register'), ['controller' => 'Users', 'action' => 'addd']) ?> </li>
+				<li><?= $this->Html->link(__('ろぐいん'), ['controller' => 'Users', 'action' => 'login']) ?> </li>
+				<li><?= $this->Html->link(__('れじすた'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
 				<?php endif; ?>
 			</ul>
 		</nav>

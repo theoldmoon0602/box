@@ -86,13 +86,13 @@ class PasswordResetsController extends AppController
 							]], true));
 
 					if ($this->PasswordResets->save($passwordReset)) {
-						$this->Flash->success(__('Password reset mail has been sent.'));
+						$this->Flash->success(__('めーるおくったやで'));
 
 						return $this->redirect(['controller' => 'Users', 'action' => 'login']);
 					}
 				}
 			}
-            $this->Flash->error(__('The password reset could not be saved. Please, try again.'));
+            $this->Flash->error(__('そりはちゃうってことよ'));
         }
         $this->set(compact('passwordReset'));
         $this->set('_serialize', ['passwordReset']);
@@ -128,7 +128,7 @@ class PasswordResetsController extends AppController
 			}
 			$user->password = $newPassword;
 			if ($this->Users->save($user)) {
-				$this->Flash->success("Password is updated");
+				$this->Flash->success('パスワード更新しといたで');
 				return $this->redirect(['controller' => 'Users', 'action' => 'login']);
 			}
 		}
