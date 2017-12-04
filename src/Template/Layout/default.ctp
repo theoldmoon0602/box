@@ -13,7 +13,6 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = 'CakePHP: the rapid development php framework';
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,8 +20,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        <?= $cakeDescription ?>:
         <?= $this->fetch('title') ?>
+		| THEOLDMOON0602BOX
     </title>
     <?= $this->Html->meta('icon') ?>
 
@@ -37,7 +36,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <nav class="top-bar expanded" data-topbar role="navigation">
         <ul class="title-area large-3 medium-4 columns">
             <li class="name">
-                <h1><a href=""><?= $this->fetch('title') ?></a></h1>
+				<h1><?= $this->Html->link('THEOLDMOON0602BOX', ['controller'=>'Questions', 'action' => 'index']) ?></h1>
             </li>
         </ul>
     </nav>
@@ -45,13 +44,12 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <div class="container clearfix">
 		<nav class="large-3 medium-4 columns" id="actions-sidebar">
 			<ul class="side-nav">
-				<li class="heading"><?= __('Actions') ?></li>
 				<?php if ($auth->user()): ?>
 				<li><?= $this->Html->link(__('Post Question'), ['controller' => 'PendingQuestions', 'action' => 'add']) ?> </li>
-				<li><?= $this->Html->link(__('Logout'), ['controller' => 'Users', 'action' => 'logout']) ?> </li>
 				<li><?= $this->Html->link(__('View My Information'), ['controller' => 'Users', 'action' => 'view', $auth->user('id')]) ?> </li>
 				<li><?= $this->Html->link(__('Password Reset'), ['controller' => 'Users', 'action' => 'edit', $auth->user('id')]) ?> </li>
-				<li><?= $this->Form->postLink(__('Leave'), ['controller' => 'Users', 'action' => 'delete', $auth->user('id')], ['confirm' => __('Are you sure you want to delete {0}?', $auth->user('email'))]) ?> </li>
+				<li><?= $this->Html->link(__('Logout'), ['controller' => 'Users', 'action' => 'logout']) ?> </li>
+				<li><?= $this->Form->postLink(__('Goodbye'), ['controller' => 'Users', 'action' => 'delete', $auth->user('id')], ['confirm' => __('Are you sure you want to delete {0}?', $auth->user('email'))]) ?> </li>
 				<?php else: ?>
 				<li><?= $this->Html->link(__('Login'), ['controller' => 'Users', 'action' => 'login']) ?> </li>
 				<li><?= $this->Html->link(__('Register'), ['controller' => 'Users', 'action' => 'addd']) ?> </li>
