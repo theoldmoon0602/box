@@ -69,7 +69,7 @@ class PasswordResetsController extends AppController
 			if (isset($passwordReset->email)) {
 				$this->loadModel('Users');
 				$user = $this->Users->find()->where(['Users.email' => $passwordReset->email])->first();
-				$this->PasswordResets->query()->where(['email'=>$passwordReset->email])->execute();
+				$this->PasswordResets->query()->delete()->where(['email'=>$passwordReset->email])->execute();
 				if ($user) {
 					$passwordReset->token = bin2hex(random_bytes(32));
 					$email = new Email();
