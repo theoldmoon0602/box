@@ -155,8 +155,8 @@ class PendingQuestionsController extends AppController
 				$email
 					->from('theoldmoon0602@theoldmoon0602.tk', 'theoldmoon0602')
 					->to($pendingQuestion->user->email)
-					->subject('Your question is answered')
-					->send(Router::url([
+					->subject('あなたの質問にふるつきがおこたえしましたので')
+					->send('みてくれ→ ' . Router::url([
 						'controller' => 'Questions',
 						'action' => 'view',
 						$question->id

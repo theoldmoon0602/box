@@ -77,8 +77,8 @@ class PasswordResetsController extends AppController
 					$email
 						->from('theoldmoon0602@theoldmoon0602.tk', 'theoldmoon0602')
 						->to($user->email)
-						->subject('Password Reset Request')
-						->send(Router::url([
+						->subject('ぱすわーどの再設定')
+						->send('このりんくをみてくれ→ ' . Router::url([
 							'controller' => 'PasswordResets',
 							'action' => 'reset',
 							'?' => [
