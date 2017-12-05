@@ -9,8 +9,8 @@
 	<div class="row">
             <?php foreach ($questions as $question): ?>
             <div>
-				<h4 class="h4"><?= h($question->text); ?></h4>
-				<p><?= h($question->answer); ?>
+				<h4 class="h4"><?= $this->Text->autoParagraph(h($question->text)); ?></h4>
+				<p><?= $this->Text->autoParagraph(h($question->answer)); ?>
 				<small><?= h($question->created); ?></small></p>
             </div>
             <?php endforeach; ?>
